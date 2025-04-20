@@ -1,0 +1,21 @@
+# Конфигурационный файл для IRC-клиента
+
+[ircServer]	# Параметры IRC сервера
+ircServerHost = "irc.rizon.net"    # Адрес сервера IRC
+ircServerPort = 7000               # Порт сервера IRC
+ircServerPass = ""                 # Пароль IRC сервера (в основном для ZNC)
+
+[ircClient] # Параметры IRC клиента
+ircBotUser = "cbot"                # Имя пользователя бота
+ircBotNick = "CxxBot"                # Ник бота
+ircBotRnam = "C++ IRC Bot"         # Реально имя (RealName)
+ircBotNspw = "NickServPASS"        # Пароль NickServ
+ircBotChan = "#test"               # Канал, к которому присоединяется бот
+ircBotAdmi = "BotMaster"           # Ник администратора бота
+ircBotAcon = false                 # Флаг автозапуска (true/false)
+ircBotCsym = "."                   # Символ команды бота
+ircBotRcon = ""     			   # Сообщения серверу при соединении
+ircBotDccv = "C++ IRC bot"         # CTCP DCC VERSION
+
+[botComset] # Параметры дополнительных функций бота
+#ipInfToken = "xxxxxxxxxxxxx"        # Токен сервиса ipinfo.io (если нужен)

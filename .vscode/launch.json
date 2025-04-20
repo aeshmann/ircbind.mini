@@ -1,0 +1,26 @@
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Makefile (gdb) Launch", // Название конфигурации
+            "type": "cppdbg",       // Тип отладчика (для C++)
+            "request": "launch",    // Тип запроса (запуск программы)
+            "program": "${workspaceFolder}/ircbot", // Путь к исполняемому файлу
+            "args": [],             // Аргументы командной строки
+            "stopAtEntry": false,   // Остановиться на первой строке при запуске
+            "cwd": "${workspaceFolder}", // Рабочая директория
+            "environment": [],      // Дополнительные переменные окружения
+            "externalConsole": false, // Использовать внешнюю консоль или нет
+            "MIMode": "gdb",        // Отладчик (gdb для Linux)
+            "setupCommands": [      // Дополнительные команды для gdb
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "make" // Задача, которая будет выполнена перед запуском (например, сборка через make)
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+# Конфигурационный файл для IRC-клиента
+
+[ircServer]
+ircServerHost = "2.63.252.53"      # Адрес сервера IRC
+ircServerPort = 6660               # Порт сервера IRC
+ircServerPass = ""                 # Пароль IRC сервера (ZNC)
+
+[ircClient]
+ircBotUser = "cbot"             # Имя пользователя бота
+ircBotNick = "CxxBot"           # Ник бота
+ircBotRnam = "C++ IRC Bot"      # Реально имя (RealName)
+ircBotNspw = ""			# Пароль NickServ
+ircBotChan = "#ircxx"           # Канал, к которому присоединяется бот
+ircBotAdmi = "const"            # Ник администратора
+ircBotAcon = false              # Флаг автозапуска (true/false)
+ircBotCsym = "."                # Символ команды бота
+ircBotRcon = "NickServ :IDENTIFY NSPASS" # Для РусНета, где NSPASS - пароль NickServ
+ircBotDccv = "C++ IRC bot"	# DCC VERSION бота
+
+[botComset] # Параметры дополнительных функций бота
+#ipInfToken = "xxxxxxxxxxxxxx"	# Токен сервиса ipinfo.io
