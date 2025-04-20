@@ -4,10 +4,6 @@
 #include <iostream>
 #include <sstream>
 
-#ifdef _WIN32
-#include <winsock2.h>
-#pragma comment(lib,"WS2_32")
-#else
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -16,7 +12,6 @@
 #define close(s)
 #define SOCKET_ERROR -1
 #define INVALID_SOCKET -1
-#endif
 
 class IRCSocket
 {
