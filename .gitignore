@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+ircbot
 
 # Dev runtime configs
 run/
