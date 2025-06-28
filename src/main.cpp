@@ -338,15 +338,15 @@ int main(int argc, char* argv[]) {
 
     if (client.InitSocket())
     {
-        std::cout << "Socket initialized. Connecting..." << std::endl;
+        std::cout << "[->] Socket initialized. Connecting..." << std::endl;
 
         if (client.Connect(config.serverconf.bothostname.c_str(), config.serverconf.bothostport))
         {
-            std::cout << "Connected. Loggin in..." << std::endl;
+            std::cout << "[>>] Connected. Loggin in..." << std::endl;
 
             if (client.Login(config.clientconf.nickname, config.clientconf.username, config.serverconf.bothostpass, config.clientconf.realname))
             {
-                std::cout << "Logged." << std::endl;
+                std::cout << "[+] Login completed." << std::endl;
                 running = true;
                 signal(SIGINT, signalHandler);
                 while (client.Connected() && running) {
@@ -358,7 +358,7 @@ int main(int argc, char* argv[]) {
                 client.Disconnect();
             }
             
-            std::cout << "Disconnected." << std::endl;
+            std::cout << "[-] Disconnected." << std::endl;
         }
     }
     return 0;

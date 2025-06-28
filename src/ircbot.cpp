@@ -50,7 +50,7 @@ void IRCBot::Disconnect()
 
 bool IRCBot::SendIRC(std::string data)
 {
-    data.append("\n");
+    data.append("\r\n");
     return _socket.SendData(data.c_str());
 }
 
@@ -59,15 +59,20 @@ bool IRCBot::Login(std::string nick, std::string user, std::string pass, std::st
     _nick = nick;
     _user = user;
 
-    if (SendIRC("HELLO"))
-    {
-        if (!pass.empty() && !SendIRC("PASS " + user + ':' + pass))
-            return false;
-        if (SendIRC("NICK " + nick))
-            if (SendIRC("USER " + user + " 8 * :" + rnam))
-                return true;
-    }
+    if (!pass.empty()) {
+        SendIRC("PASS " + pass + "\r\n");
+        std::cout << "[+] Sent PASS" << std::endl;
+        }
 
+    if (SendIRC("NICK " + nick) && SendIRC("USER " + user + " 8 * :" + rnam)) {
+        if (_debug)
+            {
+            std::cout << "[+] Connected!" << std::endl;
+            std::cout << "Logged in as " << nick << std::endl;
+            }
+        return true;
+        }
+ 
     return false;
 }
 
@@ -231,10 +236,10 @@ std::vector<std::string> botReply(const std::string text, IRCMessage message, IR
     std::vector<std::string> commSet = splitStrBySpc(text);
     int execCase = 0;
     std::string reply;
-    std::cout << "Command received: " << commSet[0] << '\n';
+    std::cout << "[!] Command received: " << commSet[0] << '\n';
     if (commSet.size() > 1) {
         for (size_t i = 1; i < commSet.size(); i++) {
-            std::cout << "Command argument: " << i << ") " << commSet[i] << '\n';
+            std::cout << "[$] Command argument: " << i << ") " << commSet[i] << '\n';
         }
     }
     
@@ -247,7 +252,7 @@ std::vector<std::string> botReply(const std::string text, IRCMessage message, IR
     }
     switch (execCase) {
         case 0: {
-            reply += "Error! Command \"" + text + "\" not understood";
+            reply += "[!] Error! Command \"" + text + "\" not understood";
             break;
         }
 
@@ -264,7 +269,7 @@ std::vector<std::string> botReply(const std::string text, IRCMessage message, IR
                     }
 
                 }
-                reply += " Type .help command for more";
+                reply += " Type " + IRCBot::commsymbol + "help <command> for more info";
             }
             else {
                 bool command_found = false;
@@ -291,7 +296,7 @@ std::vector<std::string> botReply(const std::string text, IRCMessage message, IR
 
         case 3: {
             if (message.prefix.nick != IRCBot::botadmnick) {
-                reply += "Not my admin!";
+                reply += message.prefix.nick + ", you are not my admin!";
             } else {
                 client->SendIRC("QUIT :Quit command received from " + client->botadmnick);
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
