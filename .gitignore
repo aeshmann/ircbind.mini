@@ -32,6 +32,9 @@
 *.app
 ircbot
 
+# Visual Studio Code settigns
+.vscode/
+
 # Dev runtime configs
 run/
 dev/

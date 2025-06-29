@@ -66,5 +66,12 @@
         "valarray": "cpp",
         "cinttypes": "cpp"
     },
-    "C_Cpp.autocompleteAddParentheses": true
+    "C_Cpp.autocompleteAddParentheses": true,
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/const/Documents/code.git/ircbot.cxx",
+            "binaryPath": "/home/const/Documents/code.git/ircbot.cxx/ircbot",
+            "binaryArgs": []
+        }
+    ]
 }
