@@ -36,6 +36,7 @@ ircbot
 .vscode/
 
 # Dev runtime configs, objects
+bin/
 obj/
 run/
 dev/
