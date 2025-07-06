@@ -35,6 +35,7 @@ ircbot
 # Visual Studio Code settigns
 .vscode/
 
-# Dev runtime configs
+# Dev runtime configs, objects
+obj/
 run/
 dev/

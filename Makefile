@@ -1,20 +1,30 @@
 CC=g++ -std=c++20
-CXXFLAGS= -std=c++20
-CFLAGS=-c -Wall
-LDFLAGS=-lpthread -lcurl
+CXXFLAGS= -std=c++20 -Wall -pthread
+CFLAGS= -c -Wall -pthread
+LDFLAGS= -lpthread -lcurl
 SOURCE_DIR=src
-SOURCE_FILES=$(wildcard $(SOURCE_DIR)/*.cpp)
-OBJECTS=$(SOURCE_FILES:.cpp=.o)
-BUILD_DIR=bin
-EXECUTABLE=ircbot
+OBJECT_DIR=obj
+BULD_DIR=bin
+EXECUTABLE=$(BULD_DIR)/ircbot
 
-all: $(SOURCE_FILES) $(EXECUTABLE)
-	
+# Список всех .cpp файлов
+SOURCES = $(wildcard $(SOURCE_DIR)/*.cpp)
+
+# Замена .cpp на .o и замена пути src/ на obj/
+OBJECTS = $(SOURCES:$(SOURCE_DIR)/%.cpp=$(OBJECT_DIR)/%.o)
+
+all: $(EXECUTABLE)
+
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) -o $@ $(OBJECTS) $(LDFLAGS)
+	@mkdir -p $(dir $@)
+	$(CC) -o $@ $^ $(LDFLAGS)
 
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+# Правило для компиляции .cpp -> .o в директории obj/
+$(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.cpp
+	@mkdir -p $(dir $@)
+	$(CC) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(SOURCE_DIR)/*.o $(EXECUTABLE)
+	rm -rf $(OBJECT_DIR)/*.o $(EXECUTABLE)
+
+.PHONY: all clean
