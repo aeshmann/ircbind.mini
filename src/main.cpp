@@ -79,8 +79,26 @@ IRCConfig parseTomlFile(const std::string& filename) {
         }
 
         // Секция [botComset] - параметры дополнительных команд бота
-        const auto& botComset = table->get_table("botComset");
-        config.featureconf.ipinftkn = *botComset->get_as<std::string>("ipInfToken");
+        auto botComset = table->get_table("botComset");
+
+        if (botComset)
+        {
+            auto ipinftkn = botComset->get_as<std::string>("ipInfToken");
+            if (ipinftkn)
+            {
+                config.featureconf.ipinftkn = *ipinftkn;
+            }
+            else
+            {
+                std::cerr << "[botComset] exists, but 'ipInfToken' is missing or not a string." << std::endl;
+                // Обработка ошибки или установка значения по умолчанию
+            }
+        }
+        else
+        {
+            std::cerr << "[botComset] section is missing in the TOML file." << std::endl;
+            // Здесь можно использовать значения по умолчанию или завершить программу
+        }
 
     } catch (const cpptoml::parse_exception& e) {
         std::cerr << "TOML parsing error: " << e.what() << "\n";
